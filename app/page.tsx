@@ -198,26 +198,27 @@ export default function Home() {
   const userLocation = { lat: 5.5585, lng: -0.1765 };
   const streetStyle = "https://demotiles.maplibre.org/style.json";
   const satelliteStyle = useMemo(
-    () => ({
-      version: 8,
-      sources: {
-        esri: {
-          type: "raster" as const,
-          tiles: [
-            "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
-          ],
-          tileSize: 256,
-          attribution: "Tiles © Esri",
+    () =>
+      ({
+        version: 8 as const,
+        sources: {
+          esri: {
+            type: "raster" as const,
+            tiles: [
+              "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+            ],
+            tileSize: 256,
+            attribution: "Tiles © Esri",
+          },
         },
-      },
-      layers: [
-        {
-          id: "satellite",
-          type: "raster" as const,
-          source: "esri",
-        },
-      ],
-    }),
+        layers: [
+          {
+            id: "satellite",
+            type: "raster" as const,
+            source: "esri",
+          },
+        ],
+      }) satisfies Parameters<typeof Map>[0]["mapStyle"],
     []
   );
   const routeGeojson = useMemo(
